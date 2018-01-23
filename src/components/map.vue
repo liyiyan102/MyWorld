@@ -1,59 +1,81 @@
 <template>
-  <div>
-    <!-- <input id="keyword" type="text" v-model="storename" @input="inputname"></input> -->
-  <div id="cont-map" style="width:300px;height:600px">
+  <!-- <div> -->
+  <div id="cont-map">
   </div>
-</div>
+  <!-- <button type="button" name="button" @click="chuandi">chuandi</button> -->
+
+  <!-- </div> -->
 </template>
 <script>
   import AMap from 'AMap'
-  var map
+  var list
   export default {
     data () {
       return {
-        storename: ''
+        storename: '',
+        searchresult: {}
       }
     },
     mounted () {
       this.init()
+
     },
     methods: {
-      inputname () {
-        this.$store.commit('getname', this.storename)
-
+      chuandi (){
+        this.$store.commit('getadds', list.pois[0].address)
       },
       init () {
-        // var windowsArr = [];
-        // var marker = [];
-        var map = new AMap.Map("cont-map", {
-                resizeEnable: true,
-                center: [116.397428, 39.90923],
-                zoom: 10,
-                keyboardEnable: false
+        //eslint-disable-next-line
+        var map = new AMap.Map('cont-map', {
+          resizeEnable: true,
+          center: [116.397428, 39.90923],
+          zoom: 10,
+          keyboardEnable: false
         })
-        AMap.plugin(['AMap.Autocomplete','AMap.PlaceSearch'],function(){
+        debugger
+        var scope = this;
+        AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'],() => {
           var autoOptions = {
-            city: "北京",
-            input: "keyword",
+            input: 'plcinput',
+            city: '北京',
+            type: '050000'
           }
-          var autocomplete= new AMap.Autocomplete(autoOptions);
+          debugger
+          var a = this;
+          var autocomplete = new AMap.Autocomplete(autoOptions)
           var placeSearch = new AMap.PlaceSearch({
-                city:'北京',
-                map:map,
+            map: map,
+            city: '北京',
+            type: '050000'
           })
-          AMap.event.addListener(autocomplete, "select", function(e){
-             placeSearch.setCity(e.poi.adcode);
-             placeSearch.search(e.poi.name)
+          AMap.event.addListener(autocomplete, 'select', (e) => {
+            debugger
+            
+            var b = this;
+            // debugger
+            placeSearch.setCity(e.poi.adcode);
+            scope.$store.commit('getname', e.poi.name);
+            placeSearch.search(e.poi.name, (status, result) => {
+              list = result.poiList
+              // searchresult = result.poiList
+              console.log(result.poiList)
+                if (list.count == 1) {
+                  console.log("1");
+                  scope.$store.commit('getadds', result.poiList.pois[0].address)
+
+                  // console.log(list.pois[0].address);
+
+                }
+            })
           })
         })
-
-      }
+      },
     }
   }
 </script>
 <style>
-  /* #cont-map {
+  #cont-map {
     width:100%;
     height:100%
-  } */
+  }
 </style>

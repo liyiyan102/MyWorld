@@ -5,12 +5,7 @@
       <div class="addnew">
         <div class="storename">
           <span>商户：</span>
-          <placeSearch/>
-          <!-- <el-amap-search-box
-            class="searchbox"
-            :search-option="searchOption"
-            :on-search-result="onSearchResult">
-          </el-amap-search-box> -->
+          <placeSearch @plcsearch="searchclick"></placeSearch>
         </div>
         <div class="storetype">
           <span>类型：</span>
@@ -38,9 +33,6 @@
     </div>
     <div class="app-map">
       <GDmap></GDmap>
-      <!-- <el-amap vid="amap">
-        <el-amap-marker v-for="marker in markers" :position="marker"></el-amap-marker>
-      </el-amap> -->
     </div>
   </div>
 </template>
@@ -58,32 +50,12 @@ export default {
         '粤菜', '湘菜', '川菜', '西餐', '自助餐',
         '甜品糕点', '快餐', '小吃'
       ]
-      // searchOption: {
-      //   city: '武汉',
-      //   type: '餐饮服务',
-      //   citylimit: false
-      // },
-      // markers: []
     }
   },
   methods: {
-    // onSearchResult (pois) {
-    //   let latSum = 0
-    //   let lngSum = 0
-    //   if (pois.length > 0) {
-    //     pois.forEach(poi => {
-    //       let {lng, lat} = poi
-    //       lngSum += lng
-    //       latSum += lat
-    //       this.markers.push([poi.lng, poi.lat])
-    //     })
-    //     let center = {
-    //       lng: lngSum / pois.length,
-    //       lat: latSum / pois.length
-    //     }
-    //     this.mapCenter = [center.lng, center.lat]
-    //   }
-    // }
+    searchclick () {
+
+    }
   }
 }
 </script>
