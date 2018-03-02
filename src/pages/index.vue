@@ -1,8 +1,12 @@
 <template>
   <div class="app-index">
     <div class="app-record">
-      recordhah
+      dooooo
       <div class="addnew">
+        <div class="date">
+          <span>日期：</span>
+          <dateSelect></dateSelect>
+        </div>
         <div class="storename">
           <span>商户：</span>
           <placeSearch @plcsearch="searchclick"></placeSearch>
@@ -17,6 +21,11 @@
           <span>地址：</span>
           <input/>
         </div>
+        <div class="rate">
+          <Ratio/>
+          <span>评分：</span>
+          <Rate v-model="rateval"></Rate>
+        </div>
         <div class="storepic">
           <span>上传图片：</span>
           <input type="text">
@@ -27,8 +36,8 @@
         <div class="storecom">
           <span>小记：</span>
           <textarea></textarea>
-        </div>
-        <button>添加记录</button>
+        </div> -->
+        <!-- <button>添加记录</button>
       </div>
     </div>
     <div class="app-map">
@@ -38,10 +47,12 @@
 </template>
 
 <script>
-import GDmap from '../components/map'
-import placeSearch from '../components/placesearch'
+import GDmap from '../components/map';
+import placeSearch from '../components/placesearch';
+import dateSelect from '../components/dateselect';
+
 export default {
-  components: {GDmap, placeSearch},
+  components: {GDmap, placeSearch,dateSelect},
   data () {
     return {
       type: '',
@@ -49,7 +60,8 @@ export default {
         '徽菜', '淮扬菜', '火锅', '日料', '烧烤',
         '粤菜', '湘菜', '川菜', '西餐', '自助餐',
         '甜品糕点', '快餐', '小吃'
-      ]
+      ],
+      rateval: 0
     }
   },
   methods: {

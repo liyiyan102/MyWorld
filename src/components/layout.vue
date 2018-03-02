@@ -7,13 +7,17 @@
       </keep-alive>
     </div>
     <div class="app-slideshow">slideshow
+      <!-- <photoSlider/> -->
     </div>
     <div class="app-foot">foot</div>
   </div>
 </template>
 
 <script>
+import photoSlider from './photoslider';
+
 export default {
+  components: {photoSlider},
   name: 'layout'
 }
 </script>

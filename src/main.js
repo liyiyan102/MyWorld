@@ -3,9 +3,11 @@
 import Vue from 'vue'
 // import IndexPage from './pages/index'
 import Layout from './components/layout'
-// import VueAMap from 'vue-amap'
 import store from './store/index'
 import router from './router'
+import iView from 'iview';
+
+Vue.use(iView);
 
 // Vue.use(VueAMap)
 //
